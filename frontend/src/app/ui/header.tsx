@@ -8,54 +8,46 @@ export default function Header() {
 		setTopEducationVisible(!topEducationVisible);
 	};
 
-	const openTopEducation = () => {
-		const hoverTimer = setTimeout(() => {
-			setTopEducationVisible(true);
-		}, 500);
-	};
-
-	const closeTopEducation = () => {
-		setTopEducationVisible(false);
-	};
-
 	return (
-		<header className="flex flex-col bg-blue-500 p-4 items-center">
+		<header className="flex flex-col bg-blue-800 p-4 items-center">
 			<div className="flex">
 				<img
 					src="./menu.svg"
-					className="invert cursor-pointer me-1"
+					className="invert cursor-pointer"
 					onClick={toggleTopEducation}
 				/>
 				{topEducationVisible ? (
-					<div className="text-white text-xl font-bold">
+					<h1 className="text-white text-xl font-bold">
 						Top Education
-					</div>
+					</h1>
 				) : null}
 			</div>
-			<div
-				className="flex flex-col h-full"
-				onMouseEnter={openTopEducation}
-				onMouseLeave={closeTopEducation}
-			>
-				<div className="flex justify-start">
+			<div className="flex flex-col h-full text-white">
+				<a
+					href="/agregar-estudiante"
+					className="flex justify-start hover:text-slate-300 my-1"
+				>
 					<img src="./add.svg" className="invert cursor-pointer" />
-					{topEducationVisible ? (
-						<a
-							href="/agregar-estudiante"
-							className="text-white hover:text-slate-300"
-						>
-							Añadir estudiante
-						</a>
-					) : null}
-				</div>
-				<div className="flex justify-start">
+					{topEducationVisible ? <p>Añadir estudiante</p> : null}
+				</a>
+				<a
+					href="/"
+					className="flex justify-start hover:text-slate-300 my-1"
+				>
 					<img src="./groups.svg" className="invert cursor-pointer" />
 					{topEducationVisible ? (
-						<a href="/" className="text-white hover:text-slate-300">
-							Ver estudiantes
-						</a>
+						<p className="hover:text-slate-300">Ver estudiantes</p>
 					) : null}
-				</div>
+				</a>
+				<a
+					href="/subir-notas"
+					className="flex justify-start hover:text-slate-300 my-1"
+				>
+					<img src="./file.svg" className="invert cursor-pointer" />
+					{topEducationVisible ? (
+						<p className="hover:text-slate-300">Subir notas</p>
+					) : null}
+				</a>
 			</div>
 		</header>
 	);
