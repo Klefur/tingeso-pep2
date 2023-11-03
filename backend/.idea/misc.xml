@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/config" />
-    <file type="web" url="file://$PROJECT_DIR$/eureka" />
-    <file type="web" url="file://$PROJECT_DIR$/gateway" />
-    <file type="web" url="file://$PROJECT_DIR$/m1" />
-    <file type="web" url="file://$PROJECT_DIR$/m2" />
-    <file type="web" url="file://$PROJECT_DIR$/m3" />
+    <file type="web" url="file://$PROJECT_DIR$/backend-config" />
+    <file type="web" url="file://$PROJECT_DIR$/backend-eureka" />
+    <file type="web" url="file://$PROJECT_DIR$/backend-gateway" />
+    <file type="web" url="file://$PROJECT_DIR$/backend-m1" />
+    <file type="web" url="file://$PROJECT_DIR$/backend-m2" />
+    <file type="web" url="file://$PROJECT_DIR$/backend-m3" />
     <file type="web" url="file://$PROJECT_DIR$/Minikube" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK" />

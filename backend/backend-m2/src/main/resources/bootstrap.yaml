@@ -1,0 +1,22 @@
+spring:
+  devtools:
+    restart:
+      aditional-paths: src/main/java
+  application:
+    name: backend-m2
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  datasource:
+    plataform: postgres
+    driver-class-name: org.postgresql.Driver
+    dbname: top_education_cuota
+    url: jdbc:postgresql://localhost:5432/top_education_cuota
+    username: postgres
+    password: 1234
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8081
