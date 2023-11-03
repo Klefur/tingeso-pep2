@@ -190,7 +190,7 @@ export default function Home() {
 
 	const [estudiante, setEstudiante] = useState(data.estudiantes[0]);
 
-	const selectEstudiante = (id) => {
+	const selectEstudiante = (id: number) => {
 		setEstudiante(
 			data.estudiantes.find((estudiante) => estudiante.id === id)
 		);
