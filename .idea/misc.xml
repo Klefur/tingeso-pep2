@@ -9,4 +9,5 @@
     <file type="web" url="file://$PROJECT_DIR$/backend-m2" />
     <file type="web" url="file://$PROJECT_DIR$/backend-m3" />
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK" />
 </project>
