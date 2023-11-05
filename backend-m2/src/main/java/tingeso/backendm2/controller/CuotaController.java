@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cuota")
+@CrossOrigin
 public class CuotaController {
 
     @Autowired
@@ -43,5 +44,11 @@ public class CuotaController {
     public String pagarCuota(@RequestParam("cuotaId") Long cuotaId) {
         pagServ.pagarCuota(cuotaId);
         return "Cuota Pagada";
+    }
+
+    @PostMapping("/dcto-notas")
+    public String aplicarDescuentoNotas(@RequestBody List<String> ruts) {
+        pagServ.dctoNotas(ruts);
+        return "descuentos aplicados";
     }
 }

@@ -66,7 +66,7 @@ export default function Home() {
     return (
         <div className="flex flex-col bg-indigo-light px-10 text-white rounded-md w-fit">
             <h1 className="text-2xl pt-6 pb-3"> Datos de estudiante</h1>
-            <form className="py-3 flex flex-col" onSubmit={handleSubmit}>
+            <div className="py-3 flex flex-col">
                 <div className="pb-5">
                     <label htmlFor="nombres" className="mr-1">Nombres: </label>
                     <input type="text" 
@@ -106,10 +106,11 @@ export default function Home() {
                         <option value="3">Subvencionado</option>
                     </select>
                 </div>
-                <button type="submit" className="w-fit bg-slate-200 hover:bg-slate-300 mx-auto rounded-md p-2 text-black">
+                <button type="submit" className="w-fit bg-slate-200 hover:bg-slate-300 mx-auto rounded-md p-2 text-black"
+                    onClick={handleSubmit}>
                         Aceptar
                 </button>
-            </form>
+            </div>
         </div>
     );
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CuotaRepository extends JpaRepository<Cuota, Long> {
-    List<Cuota> findAllByUsuarioId (Integer uId);
+    List<Cuota> findAllByIdUsuario(Integer uId);
 }

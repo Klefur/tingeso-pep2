@@ -58,7 +58,7 @@ public class CuotaService {
             Cuota cuota = new Cuota();
             cuota.setNro_cuota(i);
             cuota.setTotal(total);
-            cuota.setUsuarioId(user.getId().intValue());
+            cuota.setIdUsuario(user.getId());
             cuota.setFecha_plazo(fechas.get(i - 1));
             cuota.setInteres_acumulado(0);
             cuota.setDcto_aplicable(dcto_correspondido);
@@ -71,7 +71,7 @@ public class CuotaService {
     }
 
     public List<Cuota> getALlByUser(Integer uId) {
-        List<Cuota> cuotas = pagoRep.findAllByUsuarioId(uId);
+        List<Cuota> cuotas = pagoRep.findAllByIdUsuario(uId);
         Calendar calendar = Calendar.getInstance();
 
         if (calendar.get(Calendar.DAY_OF_MONTH) < 5 && calendar.get(Calendar.DAY_OF_MONTH) > 10) {
@@ -115,7 +115,7 @@ public class CuotaService {
             }
 
             if (dcto != 0) {
-                cuotas = pagoRep.findAllByUsuarioId(user.getId().intValue());
+                cuotas = pagoRep.findAllByIdUsuario(user.getId().intValue());
                 for (Cuota cuota : cuotas) {
                     if (!cuota.getPagado()) {
                         cuota.setDcto_aplicable(cuota.getDcto_aplicable() + dcto);
@@ -127,7 +127,7 @@ public class CuotaService {
         }
     }
 
-    public Integer pagarCuota(Long id) {
+    public Long pagarCuota(Long id) {
         Calendar calendar = Calendar.getInstance();
         Cuota temp = show(id);
 
@@ -141,7 +141,7 @@ public class CuotaService {
             pagoRep.save(temp);
         }
 
-        return temp.getUsuarioId();
+        return temp.getIdUsuario();
     }
 
     public List<Cuota> calcularInteres(List<Cuota> cuotas) {

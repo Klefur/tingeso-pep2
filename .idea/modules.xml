@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend-m1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend-m1.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend-m2.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend-m2.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend-m3.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend-m3.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/tingeso-pep2.iml" filepath="$PROJECT_DIR$/.idea/tingeso-pep2.iml" />
     </modules>
   </component>

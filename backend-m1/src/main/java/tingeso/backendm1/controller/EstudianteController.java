@@ -5,6 +5,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import tingeso.backendm1.model.Estudiante;
+import tingeso.backendm1.model.Resume;
 import tingeso.backendm1.service.EstudianteService;
 
 import java.text.SimpleDateFormat;
@@ -30,14 +31,19 @@ public class EstudianteController {
         return uServ.getALl();
     }
 
-    @GetMapping("/rut")
-    public Estudiante getByRut(@RequestBody String rut) {
+    @GetMapping("/rut/{rut}")
+    public Estudiante getByRut(@PathVariable String rut) {
         return uServ.findByRut(rut);
     }
 
     @GetMapping("/{id}")
     public Estudiante getById(@PathVariable Long id) {
         return uServ.show(id);
+    }
+
+    @GetMapping(value = "/{id}/resume", produces = "application/json")
+    public Resume getResume(@PathVariable Long id) {
+        return uServ.getResume(id);
     }
 
     @PostMapping()
