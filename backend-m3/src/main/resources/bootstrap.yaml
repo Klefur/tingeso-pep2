@@ -15,7 +15,7 @@ spring:
       uri: http://localhost:8081
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/top_education_cuota
+    url: jdbc:postgresql://localhost:5432/top_education_nota
     username: postgres
     password: 1234
   servlet:

@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/estudiante")
+@CrossOrigin
 public class EstudianteController {
     @Autowired
     EstudianteService uServ;
@@ -29,10 +30,19 @@ public class EstudianteController {
         return uServ.getALl();
     }
 
+    @GetMapping("/rut")
+    public Estudiante getByRut(@RequestBody String rut) {
+        return uServ.findByRut(rut);
+    }
+
+    @GetMapping("/{id}")
+    public Estudiante getById(@PathVariable Long id) {
+        return uServ.show(id);
+    }
+
     @PostMapping()
-    public String guardarUsuario(Estudiante usuario) {
-        uServ.crear(usuario);
-        return "redirect:/"; // Redirige de nuevo a la lista de usuarios
+    public Estudiante guardarUsuario(@RequestBody Estudiante estudiante) {
+        return uServ.crear(estudiante);
     }
 
     @DeleteMapping()

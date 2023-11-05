@@ -9,13 +9,17 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
   cloud:
     config:
       enabled: true
       uri: http://localhost:8081
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/top_education_cuota
+    url: jdbc:postgresql://localhost:5432/top_education_estudiante
     username: postgres
     password: 1234
   servlet:
