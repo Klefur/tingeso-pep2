@@ -1,6 +1,7 @@
 'use client';
 
 import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Estudiante {
     nombres: string;
@@ -39,6 +40,8 @@ export default function Home() {
         }
       };
 
+    const router = useRouter();
+
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
@@ -48,6 +51,7 @@ export default function Home() {
             tipo_colegio: { id: id_tipo_colegio as number}
         };
 
+        router.push('/');
 
         try {
             console.log(JSON.stringify(formEstudiante));
