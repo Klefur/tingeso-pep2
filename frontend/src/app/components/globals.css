@@ -6,20 +6,20 @@
 /* Estilo para la barra de desplazamiento */
 ::-webkit-scrollbar {
     width: 6px; /* Ancho de la barra de desplazamiento */
-  }
-  
-  /* Estilo para el riel de la barra de desplazamiento */
-  ::-webkit-scrollbar-track {
-    background: hidden; /* Color de fondo del riel */
-  }
-  
-  /* Estilo para el pulgar (la parte desplazable) de la barra de desplazamiento */
-  ::-webkit-scrollbar-thumb {
-    background: #888; /* Color del pulgar de la barra de desplazamiento */
-    border-radius: 6px; /* Radio de esquinas del pulgar */
-  }
-  
-  /* Estilo cuando el puntero se coloca sobre la barra de desplazamiento */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+}
+
+/* Estilo para el riel de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background: hidden; /* Color de fondo del riel */
+}
+
+/* Estilo para el pulgar (la parte desplazable) de la barra de desplazamiento */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 6px; /* Radio de esquinas del pulgar */
+}
+
+/* Estilo cuando el puntero se coloca sobre la barra de desplazamiento */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

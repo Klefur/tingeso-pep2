@@ -23,8 +23,8 @@ public class CuotaService {
     Descuento descuentos;
     Interes intereses;
     final Integer arancel = 1500000;
-    final String estudianteURL = "http://localhost:8082/estudiante/";
-    final String notaURL = "http://localhost:8084/nota/";
+    final String estudianteURL = "http://localhost:8080/estudiante/";
+    final String notaURL = "http://localhost:8080/nota/";
 
     public void generarCuotas(Cuota cuotasForm, Long userId) {
         Estudiante user = restTemplate.exchange(

@@ -1,4 +1,4 @@
-package tingeso.backendm1.model;
+package tingeso.backendm3.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

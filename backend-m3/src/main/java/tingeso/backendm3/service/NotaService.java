@@ -9,13 +9,16 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import tingeso.backendm3.model.Cuota;
 import tingeso.backendm3.model.Estudiante;
 import tingeso.backendm3.model.Nota;
+import tingeso.backendm3.model.Resume;
 import tingeso.backendm3.repository.NotaRepository;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,8 +29,8 @@ public class NotaService {
     @Autowired
     RestTemplate restTemplate;
 
-    final String estudianteURL = "http://localhost:8082/estudiante/";
-    final String cuotaURL = "http://localhost:8083/cuota/";
+    final String estudianteURL = "http://localhost:8080/estudiante/";
+    final String cuotaURL = "http://localhost:8080/cuota/";
     public void leerCSV(MultipartFile csvFile) {
         if (csvFile != null) {
             List<String> ruts = new ArrayList<>();
@@ -80,5 +83,88 @@ public class NotaService {
         }
 
         return sumaNotas / cantidadNotas;
+    }
+
+    public Resume getResume(Long uId) {
+        // Calculo de promedio de notas
+        Double promedio_notas = promedioGeneralNotas(uId);
+
+        // Calculo del total de notas
+        Integer total_examenes = getByUser(uId).size();
+
+        // Calculo del total a pagar con y sin descuento
+        List<Cuota> cuotas = restTemplate.exchange(
+                cuotaURL + "ver-cuotas/" + uId.toString(),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Cuota>>() {}
+        ).getBody();
+
+        List<Integer> dcto = restTemplate.exchange(
+                cuotaURL + "ver-descuentos/" + uId.toString(),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Integer>>() {}
+        ).getBody();
+
+        List<Integer> interes = restTemplate.exchange(
+                cuotaURL + "ver-interes/" + uId.toString(),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Integer>>() {}
+        ).getBody();
+        int totalArancel = 0;
+        int totalBase = 1500000;
+
+        for (int i = 0; i < cuotas.size(); i++) {
+            totalArancel += cuotas.get(i).getTotal() - dcto.get(i) + interes.get(i);
+        }
+        // Cantidad de cuotas
+        Integer cantidad_cuotas = cuotas.size();
+
+        // Calculo de ultima fecha de pago
+        Date ultimaFecha = null;
+
+        for (Cuota pago : cuotas) {
+            Date fechaPago = pago.getFecha_pago();
+            if (fechaPago != null) {
+                if (ultimaFecha == null || fechaPago.after(ultimaFecha)) {
+                    ultimaFecha = fechaPago;
+                }
+            }
+        }
+
+        // Total pagado y por pagar
+        int pagado = 0;
+        int pagar  = 0;
+
+        for (int i = 0; i < cuotas.size(); i++) {
+            if (cuotas.get(i).getPagado()) {
+                pagado += cuotas.get(i).getTotal() - dcto.get(i) + interes.get(i);
+            }
+            else {
+                pagar += cuotas.get(i).getTotal() - dcto.get(i) + interes.get(i);
+            }
+        }
+
+        // Cantidad de cuotas pagadas y atrasas
+        Integer pagadas = 0;
+        Integer atrasados = 0;
+
+        for (Cuota cuota : cuotas) {
+            if (cuota.getPagado()) {
+                pagadas++;
+            }
+            if (cuota.getAtrasado()) {
+                atrasados++;
+            }
+        }
+
+        Resume resume = new Resume(
+                total_examenes, promedio_notas, totalArancel, totalBase,
+                pagado, pagar, cantidad_cuotas, pagadas, atrasados, ultimaFecha
+        );
+
+        return resume;
     }
 }

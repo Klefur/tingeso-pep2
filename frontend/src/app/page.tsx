@@ -84,6 +84,7 @@ export default function Home() {
 				<div className="flex flex-col rounded-s-md ps-4 py-3 overflow-y-scroll min-h-full max-h-[97.42vh] pe-3">
 					{estudiantes.length != 0 ? estudiantes.map((estudiante) => (
 						<button
+							key={estudiante.id}
 							id={estudiante.id.toString()}
 							className="p-1 pt-2 bg-indigo-light hover:bg-charcoal rounded-md  my-2 text-white text-sm"
 							onClick={() => selectEstudiante(estudiante.id)}
@@ -201,7 +202,9 @@ export default function Home() {
 						<h3>
 							Precio Base
 						</h3> 
-						{resume ? ( <div>{resume.total_base}</div> )	: null}
+						{resume ? ( <div>{
+							resume.cantidad_cuotas != 0 ? resume.total_base : 0
+						}</div> )	: null}
 					</div>
 					<div>
 						<h3>

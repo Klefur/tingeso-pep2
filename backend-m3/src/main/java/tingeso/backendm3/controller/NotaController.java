@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tingeso.backendm3.model.Nota;
+import tingeso.backendm3.model.Resume;
 import tingeso.backendm3.service.NotaService;
 
 import java.util.List;
@@ -24,6 +25,11 @@ public class NotaController {
     @GetMapping("/{uId}")
     public List<Nota> notasDeUsuario(@PathVariable Long uId) {
         return notaServ.getByUser(uId);
+    }
+
+    @GetMapping(value = "/{id}/resume", produces = "application/json")
+    public Resume getResume(@PathVariable Long id) {
+        return notaServ.getResume(id);
     }
 
     @GetMapping("/promedio/{uId}")

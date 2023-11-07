@@ -26,11 +26,15 @@ spring:
             allowed-headers: "*"
             allow-credentials: true
       routes:
-        - id: backend-otro-service
-          uri: lb://backend-otro-service
+        - id: backend-m1
+          uri: lb://backend-m1
           predicates:
-            - Path=/otro/**
-        - id: backend-B-service
-          uri: lb://backend-B-service
+            - Path=/estudiante/**
+        - id: backend-m2
+          uri: lb://backend-m2
           predicates:
-            - Path=/B/**
+            - Path=/cuota/**
+        - id: backend-m3
+          uri: lb://backend-m3
+          predicates:
+            - Path=/nota/**
