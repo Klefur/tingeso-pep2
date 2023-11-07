@@ -27,14 +27,14 @@ spring:
             allow-credentials: true
       routes:
         - id: backend-m1
-          uri: lb://backend-m1
+          uri: lb://http://localhost:8082
           predicates:
             - Path=/estudiante/**
         - id: backend-m2
-          uri: lb://backend-m2
+          uri: lb://http://localhost:8083
           predicates:
             - Path=/cuota/**
         - id: backend-m3
-          uri: lb://backend-m3
+          uri: lb://http://localhost:8084
           predicates:
             - Path=/nota/**
