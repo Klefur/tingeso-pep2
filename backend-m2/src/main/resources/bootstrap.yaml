@@ -1,3 +1,9 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka/
 spring:
   devtools:
     restart:
@@ -22,9 +28,8 @@ spring:
     multipart:
       max-file-size: 5MB
       max-request-size: 10MB
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      default-zone: http://localhost:8761/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

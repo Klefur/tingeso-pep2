@@ -1,6 +1,5 @@
 package tingeso.backendm1.service;
 
-import org.springframework.web.client.RestTemplate;
 import tingeso.backendm1.model.Estudiante;
 import tingeso.backendm1.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

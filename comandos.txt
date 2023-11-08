@@ -1,0 +1,40 @@
+cd backend-config
+gradle clean build -x test
+docker build -t klefurusach/backend-config .
+docker push klefurusach/backend-config
+cd ..
+
+cd backend-eureka
+gradle clean build -x test
+docker build -t klefurusach/backend-eureka .
+docker push klefurusach/backend-eureka
+cd ..
+
+cd backend-gateway
+gradle clean build -x test
+docker build -t klefurusach/backend-gateway .
+docker push klefurusach/backend-gateway
+cd ..
+
+cd backend-m1
+gradle clean build -x test
+docker build -t klefurusach/backend-m1 .
+docker push klefurusach/backend-m1
+cd ..
+
+cd backend-m2
+gradle clean build -x test
+docker build -t klefurusach/backend-m2 .
+docker push klefurusach/backend-m2
+cd ..
+
+cd backend-m3
+gradle clean build -x test
+docker build -t klefurusach/backend-m3 .
+docker push klefurusach/backend-m3
+cd ..
+
+cd frontend
+docker build -t klefurusach/frontend .
+docker push klefurusach/frontend
+cd ..

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-eureka-deployment
+  labels:
+    app: backend-eureka-deployment
+spec:
+  selector:
+    matchLabels:
+      app: backend-eureka-deployment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend-eureka-deployment
+    spec:
+      containers:
+        - name: backend-eureka
+          image: klefurusach/backend-eureka:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://backend-config:8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-eureka
+  labels:
+    app: backend-eureka
+spec:
+  selector:
+    app: backend-eureka-deployment
+  ports:
+    - protocol: TCP
+      port: 8761
+      targetPort: 8761
+  type: LoadBalancer
