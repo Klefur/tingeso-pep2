@@ -1,6 +1,12 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://backend-eureka:8761/eureka
 spring:
   application:
-    name: backend-gateway-service
+    name: backend-gateway
   cloud:
     config:
       enabled: true
@@ -13,9 +19,3 @@ spring:
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: true
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      default-zone: http://localhost:8761/eureka
