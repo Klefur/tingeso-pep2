@@ -50,7 +50,7 @@ export default function Home() {
 	}
 
 	const getResume = async (id: number) => {
-		const res = await fetch(`http://localhost:8082/estudiante/${id}/resume`);
+		const res = await fetch(`http://localhost:8084/nota/${id}/resume`);
 		const resume = await res.json();
 		setResume(resume);
 	}

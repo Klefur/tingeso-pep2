@@ -29,8 +29,8 @@ public class NotaService {
     @Autowired
     RestTemplate restTemplate;
 
-    final String estudianteURL = "http://localhost:8080/estudiante/";
-    final String cuotaURL = "http://localhost:8080/cuota/";
+    final String estudianteURL = "http://localhost:8082/estudiante/";
+    final String cuotaURL = "http://localhost:8083/cuota/";
     public void leerCSV(MultipartFile csvFile) {
         if (csvFile != null) {
             List<String> ruts = new ArrayList<>();
