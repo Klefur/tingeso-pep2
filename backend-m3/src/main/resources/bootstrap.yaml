@@ -21,8 +21,8 @@ spring:
       uri: http://localhost:8081
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/top_education_nota
-    #url: jdbc:postgresql://${POSTGRES_DB_HOST}:5432/${POSTGRES_DB_NOTA}?useSSL=false
+    #url: jdbc:postgresql://localhost:5432/top_education_nota
+    url: jdbc:postgresql://${POSTGRES_DB_HOST}:5432/${POSTGRES_DB_NOTA}?useSSL=false
     username: postgres
     password: 1234
   servlet:
