@@ -7,7 +7,7 @@ eureka:
     service-url:
       default-zone: http://backend-eureka:8761/eureka
   instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:8084}
     hostname: backend-m3
 
 management:
