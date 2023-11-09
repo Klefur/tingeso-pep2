@@ -94,21 +94,21 @@ public class NotaService {
 
         // Calculo del total a pagar con y sin descuento
         List<Cuota> cuotas = restTemplate.exchange(
-                cuotaURL + "ver-cuotas/" + uId.toString(),
+                cuotaURL + "ver-cuotas/" + uId,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Cuota>>() {}
         ).getBody();
 
         List<Integer> dcto = restTemplate.exchange(
-                cuotaURL + "ver-descuentos/" + uId.toString(),
+                cuotaURL + "ver-descuentos/" + uId,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Integer>>() {}
         ).getBody();
 
         List<Integer> interes = restTemplate.exchange(
-                cuotaURL + "ver-interes/" + uId.toString(),
+                cuotaURL + "ver-interes/" + uId,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Integer>>() {}
@@ -160,11 +160,9 @@ public class NotaService {
             }
         }
 
-        Resume resume = new Resume(
+        return new Resume(
                 total_examenes, promedio_notas, totalArancel, totalBase,
                 pagado, pagar, cantidad_cuotas, pagadas, atrasados, ultimaFecha
         );
-
-        return resume;
     }
 }

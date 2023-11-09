@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cuota")
-@CrossOrigin
 public class CuotaController {
 
     @Autowired

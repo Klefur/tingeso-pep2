@@ -15,10 +15,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
-    deferDatasourceInitialization: true
-  sql:
-    init:
-      mode: always
   cloud:
     config:
       enabled: true

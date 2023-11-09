@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/nota")
-@CrossOrigin
 public class NotaController {
     @Autowired
     NotaService notaServ;

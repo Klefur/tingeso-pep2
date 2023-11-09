@@ -101,38 +101,38 @@ export default function Home() {
 				<div className='flex justify-between'>
 					<div>
 						<h3 className='me-2'>ID estudiante: </h3> 
-						{estudiante ? ( <div>{estudiante.id}</div> )	: null}
+						<div>{estudiante.id}</div>
 					</div>
 					<div>
 						<h3 className='me-2'>Nombres: </h3>
-						{estudiante ? ( <div>{estudiante.nombres}</div> )	: null}
+						<div>{estudiante.nombres}</div>
 					</div>
 					<div>
 						<h3 className='me-2'>Apellidos: </h3>	
-						{estudiante ? ( <div>{estudiante.apellidos}</div>)	: null}
+						<div>{estudiante.apellidos}</div>
 					</div>
 					<div>
 						<h3 className='me-2'>Rut: </h3>
-						{estudiante ? ( <div>{estudiante.rut}</div> )	: null}
+						<div>{estudiante.rut}</div>
 					</div>
 					<div>
 						<h3 className='me-2'>Fecha de nacimiento: </h3>
-						{estudiante ? ( <div>{formatearFecha(estudiante.fecha_nacimiento)}</div> )	: null}
+						<div>{formatearFecha(estudiante.fecha_nacimiento)}</div>
 					</div>
 				</div>
 				<h2 className='text-xl'>Información institucional</h2>
 				<div className='flex justify-between'>
 					<div> 
 						<h3 className='me-2'>Nombre del Colegio: </h3> 
-						{estudiante ? ( <div>{estudiante.nombre_colegio}</div> )	: null}
+						<div>{estudiante.nombre_colegio}</div>
 					</div>
 					<div> 
 						<h3 className='me-2'>Año de egreso: </h3>
-						{estudiante ? ( <div>{estudiante.grad_year}</div> )	: null}
+						<div>{estudiante.grad_year}</div>
 					</div>
 					<div> 
 						<h3 className='me-2'>Tipo de colegio: </h3>
-						{estudiante ? ( <div>{estudiante.tipo_colegio.nombre}</div> )	: null}
+						<div>{estudiante.tipo_colegio.nombre}</div>
 					</div>
 				</div>
 				<h2 className='text-xl'>Informacion academica</h2>
@@ -141,13 +141,17 @@ export default function Home() {
 						<h3>
 							Examenes rendidos
 						</h3>
-						{resume ? ( <div>{resume.total_examenes}</div> )	: null}
+						{resume ? 
+							( <div>{resume.total_examenes}</div> )
+							:  ( <div>'-'</div> )}
 					</div>
 					<div> 
 						<h3>
 							Puntaje promedio
 						</h3>
-						{resume ? ( <div>{resume.puntaje_promedio}</div> )	: null}
+						{resume ? 
+							( <div>{resume.puntaje_promedio}</div> )	
+							: ( <div>'-'</div> )}
 					</div>
 				</div>
 				<h2 className='text-xl'>Estado de pagos</h2>
@@ -156,37 +160,49 @@ export default function Home() {
 						<h3>
 							Tipo de pago 
 						</h3>
-						{resume ? ( <div>{resume.cantidad_cuotas == 1 ? "Contado" : "Cuotas"}</div> )	: null}
+						{resume ? 
+							( <div>{resume.cantidad_cuotas == 1 ? "Contado" : "Cuotas"}</div> ) 
+							: ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
 							Cantidad de cuotas
 						</h3> 
-						{resume ? ( <div>{resume.cantidad_cuotas}</div> )	: null}
+						{resume ? 
+							( <div>{resume.cantidad_cuotas}</div> )	
+							: ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
 							Cuotas Pagadas
 						</h3> 
-						{resume ? ( <div>{resume.cuotas_pagadas}</div> )	: null}
+						{resume ? 
+							( <div>{resume.cuotas_pagadas}</div> )	
+							: ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
 							Cuotas sin pagar 
 						</h3>
-						{resume ? ( <div>{resume.cantidad_cuotas - resume.cuotas_pagadas}</div> )	: null}
+						{resume ? 
+							( <div>{resume.cantidad_cuotas - resume.cuotas_pagadas}</div> )	
+							: ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
 							Cuotas atrasadas
 						</h3>
-						{resume ? ( <div>{resume.cuotas_atrasadas}</div> )	: null}
+						{resume ? 
+							( <div>{resume.cuotas_atrasadas}</div> )
+							: ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
 							Total a pagar
 						</h3> 
-						{resume ? ( <div>{resume.total}</div> )	: null}
+						{resume ? 
+							( <div>{resume.total}</div> )
+							: ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
@@ -194,29 +210,39 @@ export default function Home() {
 						</h3> 
 						{resume ? ( <div>{
 							resume.cantidad_cuotas != 0 ? resume.total_base : 0
-						}</div> )	: null}
+						}</div> ) : ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
 							Fecha de ultimo pago
 						</h3> 
-						{resume ? ( <div>{ resume.ultimo_pago == null ? '-' : formatearFecha(resume.ultimo_pago)}</div> )	: null}
+						{resume ? 
+							 ( <div>{ resume.ultimo_pago == null ? '-' : formatearFecha(resume.ultimo_pago)}</div> )
+							 : ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
 							Pagado
 						</h3> 
-						{resume ? ( <div>{resume.pagado}</div> )	: null}
+						{resume ? 
+							( <div>{resume.pagado}</div> )
+							: ( <div>'-'</div> )}
 					</div>
 					<div>
 						<h3>
 							Por pagar
 						</h3> 
-						{resume ? ( <div>{resume.por_pagar}</div> )	: null}
+						{resume ? 
+							( <div>{resume.por_pagar}</div> )
+							: ( <div>'-'</div> )}
 					</div>
 				</div>
-				<button> Ver Cuotas </button>
-				</> )	: null}
+				<a href="/ver-cuotas" className="w-fit bg-slate-200 hover:bg-slate-300 mx-auto rounded-md p-2 text-black">
+					<button>
+						Ver cuotas
+					</button>
+				</a>
+				</> ) : null}
 				
 			</div>
 		</div>
