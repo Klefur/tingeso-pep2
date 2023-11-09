@@ -23,7 +23,7 @@ export default function Home() {
       formData.append('csvFile', selectedFile);
   
       try {
-        const response = await fetch('http://localhost:8084/nota', {
+        const response = await fetch('http://localhost:8080/nota', {
             method: 'POST',
             body: formData
         });

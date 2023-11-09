@@ -1,6 +1,4 @@
 'use client';
-
-import { get } from 'http';
 import { useEffect, useState } from 'react';
 
 interface Estudiante {
@@ -15,15 +13,6 @@ interface Estudiante {
 		id: number;
 		nombre: string;
 	}
-}
-
-interface Cuota {
-	id: number;
-	id_estudiante: number;
-	fecha_vencimiento: string;
-	fecha_pago: string;
-	monto: number;
-	estado: string;
 }
 
 interface Resume {
@@ -46,6 +35,7 @@ export default function Home() {
 	const getData = async () => {
 		const res = await fetch('http://localhost:8080/estudiante');
 		const estudiantes = await res.json();
+		console.log(estudiantes);
 		setEstudiantes(estudiantes);
 	}
 

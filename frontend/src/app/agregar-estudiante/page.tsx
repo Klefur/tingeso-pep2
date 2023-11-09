@@ -55,7 +55,7 @@ export default function Home() {
 
         try {
             console.log(JSON.stringify(formEstudiante));
-            await fetch('http://localhost:8082/estudiante', {
+            await fetch('http://localhost:8080/estudiante', {
                 method: 'POST',
                 body: JSON.stringify(formEstudiante),
                 headers: {

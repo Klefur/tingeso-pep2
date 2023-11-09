@@ -35,6 +35,83 @@ docker push klefurusach/backend-m3
 cd ..
 
 cd frontend
+npm run build
 docker build -t klefurusach/frontend .
 docker push klefurusach/frontend
 cd ..
+
+----------------------------------------------------------
+minikube start
+minikube status
+
+cd Minikube
+
+kubectl apply -f postgres-secrets.yaml
+kubectl apply -f postgres-configmap.yaml
+kubectl apply -f postgres-dp-sv-pvc.yaml
+
+kubectl apply -f frontend-deployment-service.yaml
+kubectl apply -f backend-config-deployment-service.yaml
+kubectl apply -f backend-eureka-deployment-service.yaml
+kubectl apply -f backend-m1-deployment-service.yaml
+kubectl apply -f backend-m2-deployment-service.yaml
+kubectl apply -f backend-m3-deployment-service.yaml
+kubectl apply -f backend-gateway-deployment-service.yaml
+
+----------------------------------------------------------
+
+kubectl delete service backend-config
+kubectl delete deployment backend-config-deployment
+
+kubectl delete service backend-eureka
+kubectl delete deployment backend-eureka-deployment
+
+kubectl delete service backend-m1
+kubectl delete deployment backend-m1-deployment
+
+kubectl delete service backend-m2
+kubectl delete deployment backend-m2-deployment
+
+kubectl delete service backend-m3
+kubectl delete deployment backend-m3-deployment
+
+kubectl delete service backend-gateway
+kubectl delete deployment backend-gateway-deployment
+
+kubectl delete service frontend
+kubectl delete deployment frontend-deployment
+
+kubectl delete configmap postgres-config-map
+kubectl delete secret postgres-credentials
+
+---------------------------------------------------------
+
+kubectl get pods
+kubectl get services
+kubectl get deployments
+kubectl get persistentvolumeclaims
+kubectl get persistentvolume
+kubectl get configmaps
+kubectl get secrets
+
+kubectl get all
+
+kubectl logs <Name pods>
+kubectl logs <Name pods> -f
+
+kubectl port-forward <nombre-pod> <puerto-local>:<puerto-contenedor>
+
+kubectl exec -it <Name pods postgres> bash -- psql -h postgres -U postgres
+
+CREATE DATABASE topeducationcuotas;
+CREATE DATABASE topeducationestudiantes;
+
+Para visualizar las base de datos
+\l
+
+
+minikube service frontend-service
+minikube tunnel
+
+// Este comando es para abrir una pagina que permite visualizar los pods, services entre otras cosas
+minikube dashboard
