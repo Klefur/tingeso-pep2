@@ -27,11 +27,9 @@ public class CuotaService {
     final String notaURL = "http://backend-m3/nota/";
 
     public void generarCuotas(Cuota cuotasForm, Long userId) {
-        Estudiante user = restTemplate.exchange(
+        Estudiante user = restTemplate.getForEntity(
                 estudianteURL + (userId.toString()),
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<Estudiante>() {}
+                Estudiante.class
         ).getBody();
 
         Integer total = arancel / cuotasForm.getNro_cuota();
@@ -92,19 +90,15 @@ public class CuotaService {
         List<Cuota> cuotas;
         Descuento descuento = new Descuento();
         for (String rut: ruts) {
-            Estudiante user = restTemplate.exchange(
+            Estudiante user = restTemplate.getForEntity(
                     estudianteURL + "rut/" + rut,
-                    HttpMethod.GET,
-                    null,
-                    new ParameterizedTypeReference<Estudiante>() {}
+                    Estudiante.class
             ).getBody();
 
             Integer dcto = 0;
-            Double promedio = restTemplate.exchange(
+            Double promedio = restTemplate.getForEntity(
                     notaURL + "promedio/"+ user.getId().toString(),
-                    HttpMethod.GET,
-                    null,
-                    new ParameterizedTypeReference<Double>() {}
+                    Double.class
             ).getBody();
 
             for (List<Integer> dctoNota : descuento.descuento_nota) {

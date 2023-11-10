@@ -12,7 +12,7 @@ export default function Header() {
 		<header className="flex flex-col bg-indigo-light p-4 items-center text-white">
 			<div className="flex pb-5">
 				<img
-					src="./menu.svg"
+					src="/menu.svg"
 					className="invert cursor-pointer"
 					onClick={toggleTopEducation}
 				/>
@@ -27,7 +27,7 @@ export default function Header() {
 					href="/"
 					className="flex justify-start my-1 hover:text-blue-100"
 				>
-					<img src="./groups.svg" className="invert cursor-pointer" />
+					<img src="/groups.svg" className="invert cursor-pointer" />
 					{topEducationVisible ? (
 						<p className='mx-3'>Ver estudiantes</p>
 					) : null}
@@ -36,7 +36,7 @@ export default function Header() {
 					href="/agregar-estudiante"
 					className="flex justify-start my-1 hover:text-blue-100"
 				>
-					<img src="./add.svg" className="invert cursor-pointer" />
+					<img src="/add.svg" className="invert cursor-pointer" />
 					{topEducationVisible ? (
 						<p className='mx-3'>Añadir estudiante</p> 
 						): null}
@@ -45,7 +45,7 @@ export default function Header() {
 					href="/subir-notas"
 					className="flex justify-start my-1 hover:text-blue-100"
 				>
-					<img src="./file.svg" className="invert cursor-pointer" />
+					<img src="/file.svg" className="invert cursor-pointer" />
 					{topEducationVisible ? (
 						<p className='mx-3'>Subir notas</p>
 					) : null}

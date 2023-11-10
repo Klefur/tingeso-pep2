@@ -37,11 +37,9 @@ public class NotaService {
             try (CSVReader csvReader = new CSVReader(new InputStreamReader(csvFile.getInputStream()))) {
                 String[] nextRecord;
                 while ((nextRecord = csvReader.readNext()) != null) {
-                    Estudiante user = restTemplate.exchange(
+                    Estudiante user = restTemplate.getForEntity(
                             estudianteURL + "rut/" + nextRecord[0],
-                            HttpMethod.GET,
-                            null,
-                            new ParameterizedTypeReference<Estudiante>() {}
+                            Estudiante.class
                     ).getBody();
                     if (!ruts.contains(nextRecord[0])) {
                         ruts.add(nextRecord[0]);
@@ -51,9 +49,8 @@ public class NotaService {
                 }
 
                 HttpEntity<List<String>> requestEntity = new HttpEntity<>(ruts);
-                restTemplate.exchange(
+                restTemplate.postForEntity(
                         cuotaURL + "dcto-notas" ,
-                        HttpMethod.POST,
                         requestEntity,
                         Void.class
                 );

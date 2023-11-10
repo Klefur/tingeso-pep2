@@ -35,14 +35,13 @@ export default function Home() {
 	const getData = async () => {
 		const res = await fetch('http://localhost:8080/estudiante');
 		const estudiantes = await res.json();
-		console.log(estudiantes);
-		setEstudiantes(estudiantes);
+		setEstudiantes(await estudiantes);
 	}
 
 	const getResume = async (id: number) => {
 		const res = await fetch(`http://localhost:8080/nota/${id}/resume`);
 		const resume = await res.json();
-		setResume(resume);
+		setResume(await resume);
 	}
 
 	useEffect(() => {getData()}, []);
@@ -50,12 +49,11 @@ export default function Home() {
 
 	const [estudiante, setEstudiante] = useState<Estudiante>();
 
-	const selectEstudiante = (id: number) => {
+	const selectEstudiante = async (id: number) => {
 		setEstudiante(
 			estudiantes.find((estudiante) => estudiante.id === id)
 		);
-		getResume(id);
-		console.log(resume);
+		await getResume(id);
 	};
 	
 
@@ -67,6 +65,15 @@ export default function Home() {
 		return `${dia}-${mes}-${anio}`;
 	}
 	  
+	const validarCantidadCuotas = (cantidad: number) => {
+		if (cantidad == 1) {
+			return "Contado";
+		} else if (cantidad == 0) {
+			return "-";
+		} else {
+			return "Cuotas";
+		}
+	} 
 
 	return (
 		<div className="flex h-full rounded-md w-full">
@@ -95,10 +102,10 @@ export default function Home() {
 				</div>
 			</div>
 			<div className="rounded-md flex flex-col w-full px-3 pt-2 bg-charcoal text-white">
-				<h1 className='text-2xl'>Informe del estudiante</h1>
+				<h1 className='text-2xl mb-5'>Informe del estudiante</h1>
 				{estudiante ? ( <>
-				<h2 className='text-xl'>Información personal</h2>
-				<div className='flex justify-between'>
+				<h2 className='text-xl mb-2'>Información personal</h2>
+				<div className='grid grid-cols-5 bg-slate-300 rounded-md p-3 text-black mb-2 text-center'>
 					<div>
 						<h3 className='me-2'>ID estudiante: </h3> 
 						<div>{estudiante.id}</div>
@@ -120,8 +127,8 @@ export default function Home() {
 						<div>{formatearFecha(estudiante.fecha_nacimiento)}</div>
 					</div>
 				</div>
-				<h2 className='text-xl'>Información institucional</h2>
-				<div className='flex justify-between'>
+				<h2 className='text-xl mb-2'>Información institucional</h2>
+				<div className='grid grid-cols-3 bg-slate-300 rounded-md p-3 text-black mb-2 text-center'>
 					<div> 
 						<h3 className='me-2'>Nombre del Colegio: </h3> 
 						<div>{estudiante.nombre_colegio}</div>
@@ -135,11 +142,11 @@ export default function Home() {
 						<div>{estudiante.tipo_colegio.nombre}</div>
 					</div>
 				</div>
-				<h2 className='text-xl'>Informacion academica</h2>
-				<div className='flex justify-between'>
-					<div>
+				<h2 className='text-xl mb-2'>Informacion academica</h2>
+				<div className='grid grid-cols-2 bg-slate-300 rounded-md p-3 text-black mb-2 text-center'>
+					<div className='me-16'>
 						<h3>
-							Examenes rendidos
+							Examenes rendidos:
 						</h3>
 						{resume ? 
 							( <div>{resume.total_examenes}</div> )
@@ -147,97 +154,101 @@ export default function Home() {
 					</div>
 					<div> 
 						<h3>
-							Puntaje promedio
+							Puntaje promedio:
 						</h3>
 						{resume ? 
 							( <div>{resume.puntaje_promedio}</div> )	
 							: ( <div>'-'</div> )}
 					</div>
 				</div>
-				<h2 className='text-xl'>Estado de pagos</h2>
-				<div className='flex justify-between'>
-					<div> 
-						<h3>
-							Tipo de pago 
-						</h3>
-						{resume ? 
-							( <div>{resume.cantidad_cuotas == 1 ? "Contado" : "Cuotas"}</div> ) 
-							: ( <div>'-'</div> )}
+				<h2 className='text-xl mb-2'>Estado de pagos</h2>
+				<div className='flex flex-col bg-slate-300 rounded-md p-3 text-black mb-2 text-center'>
+					<div className='grid grid-cols-5'>
+						<div> 
+							<h3>
+								Tipo de pago 
+							</h3>
+							{resume ? 
+								( <div>{validarCantidadCuotas(resume.cantidad_cuotas)}</div> ) 
+								: null}
+						</div>
+						<div>
+							<h3>
+								Cantidad de cuotas
+							</h3> 
+							{resume ? 
+								( <div>{resume.cantidad_cuotas}</div> )	
+								: null}
+						</div>
+						<div>
+							<h3>
+								Cuotas Pagadas
+							</h3> 
+							{resume ? 
+								( <div>{resume.cuotas_pagadas}</div> )	
+								: null}
+						</div>
+						<div>
+							<h3>
+								Cuotas sin pagar 
+							</h3>
+							{resume ? 
+								( <div>{resume.cantidad_cuotas - resume.cuotas_pagadas}</div> )	
+								: null}
+						</div>
+						<div>
+							<h3>
+								Cuotas atrasadas
+							</h3>
+							{resume ? 
+								( <div>{resume.cuotas_atrasadas}</div> )
+								: null}
+						</div>
 					</div>
-					<div>
-						<h3>
-							Cantidad de cuotas
-						</h3> 
-						{resume ? 
-							( <div>{resume.cantidad_cuotas}</div> )	
-							: ( <div>'-'</div> )}
-					</div>
-					<div>
-						<h3>
-							Cuotas Pagadas
-						</h3> 
-						{resume ? 
-							( <div>{resume.cuotas_pagadas}</div> )	
-							: ( <div>'-'</div> )}
-					</div>
-					<div>
-						<h3>
-							Cuotas sin pagar 
-						</h3>
-						{resume ? 
-							( <div>{resume.cantidad_cuotas - resume.cuotas_pagadas}</div> )	
-							: ( <div>'-'</div> )}
-					</div>
-					<div>
-						<h3>
-							Cuotas atrasadas
-						</h3>
-						{resume ? 
-							( <div>{resume.cuotas_atrasadas}</div> )
-							: ( <div>'-'</div> )}
-					</div>
-					<div>
-						<h3>
-							Total a pagar
-						</h3> 
-						{resume ? 
-							( <div>{resume.total}</div> )
-							: ( <div>'-'</div> )}
-					</div>
-					<div>
-						<h3>
-							Precio Base
-						</h3> 
-						{resume ? ( <div>{
-							resume.cantidad_cuotas != 0 ? resume.total_base : 0
-						}</div> ) : ( <div>'-'</div> )}
-					</div>
-					<div>
-						<h3>
-							Fecha de ultimo pago
-						</h3> 
-						{resume ? 
-							 ( <div>{ resume.ultimo_pago == null ? '-' : formatearFecha(resume.ultimo_pago)}</div> )
-							 : ( <div>'-'</div> )}
-					</div>
-					<div>
-						<h3>
-							Pagado
-						</h3> 
-						{resume ? 
-							( <div>{resume.pagado}</div> )
-							: ( <div>'-'</div> )}
-					</div>
-					<div>
-						<h3>
-							Por pagar
-						</h3> 
-						{resume ? 
-							( <div>{resume.por_pagar}</div> )
-							: ( <div>'-'</div> )}
+					<div className='grid grid-cols-5 mt-10'>
+						<div>
+							<h3>
+								Total a pagar
+							</h3> 
+							{resume ? 
+								( <div>{resume.total}</div> )
+								: null}
+						</div>
+						<div>
+							<h3>
+								Precio Base
+							</h3> 
+							{resume ? ( <div>{
+								resume.cantidad_cuotas != 0 ? resume.total_base : 0
+							}</div> ) : null}
+						</div>
+						<div>
+							<h3>
+								Fecha de ultimo pago
+							</h3> 
+							{resume ? 
+								( <div>{ resume.ultimo_pago == null ? '-' : formatearFecha(resume.ultimo_pago)}</div> )
+								: null}
+						</div>
+						<div>
+							<h3>
+								Pagado
+							</h3> 
+							{resume ? 
+								( <div>{resume.pagado}</div> )
+								: null}
+						</div>
+						<div>
+							<h3>
+								Por pagar
+							</h3> 
+							{resume ? 
+								( <div>{resume.por_pagar}</div> )
+								: null}
+						</div>
 					</div>
 				</div>
-				<a href="/ver-cuotas" className="w-fit bg-slate-200 hover:bg-slate-300 mx-auto rounded-md p-2 text-black">
+				<a href={`/ver-cuotas/${estudiante.id}`} className="w-fit bg-slate-200 hover:bg-slate-300 mx-auto rounded-md p-2 text-black mt-56">
 					<button>
 						Ver cuotas
 					</button>
