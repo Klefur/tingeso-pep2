@@ -41,8 +41,7 @@ public class CuotaController {
 
     @PostMapping("/pagar-cuota")
     public String pagarCuota(@RequestParam("cuotaId") Long cuotaId) {
-        pagServ.pagarCuota(cuotaId);
-        return "Cuota Pagada";
+        return pagServ.pagarCuota(cuotaId);
     }
 
     @PostMapping("/dcto-notas")

@@ -51,7 +51,12 @@ export default function Home({ params }: { params: { slug: string } }) {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-    
+
+        if ( parseInt(value) > estudiante.tipo_colegio.max_cuotas) {
+            alert(`El máximo de cuotas para este tipo de colegio es ${estudiante.tipo_colegio.max_cuotas}`);
+            return;
+        }
+
         setCuota({
         ...cuota,
         [name]: value,

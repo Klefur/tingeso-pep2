@@ -121,7 +121,7 @@ public class CuotaService {
         }
     }
 
-    public Long pagarCuota(Long id) {
+    public String pagarCuota(Long id) {
         Calendar calendar = Calendar.getInstance();
         Cuota temp = show(id);
 
@@ -133,9 +133,10 @@ public class CuotaService {
             System.out.println(temp.getPagado());
             System.out.println(temp.getFecha_pago());
             pagoRep.save(temp);
+            return "Pagado";
         }
 
-        return temp.getIdUsuario();
+        return "Fuera de fecha";
     }
 
     public List<Cuota> calcularInteres(List<Cuota> cuotas) {
